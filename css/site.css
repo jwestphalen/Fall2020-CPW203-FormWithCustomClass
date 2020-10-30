@@ -20,3 +20,7 @@ h1{
 div[id = validation-summary]{
     text-align: center;
 }
+
+p[id="errMsg"]{
+    color: red;
+}

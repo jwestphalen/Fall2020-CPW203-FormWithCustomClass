@@ -6,6 +6,8 @@ var VideoGame = (function () {
 window.onload = function () {
     var addBtn = document.querySelector("input[type=button]");
     addBtn.onclick = addVideoGame;
+    var errMsg = getById("errMsg");
+    errMsg.innerText = "\n";
 };
 function addVideoGame() {
     console.log("Add video game button called");
@@ -48,5 +50,25 @@ function displayGame(myGame) {
     displayDiv.appendChild(gameInfo);
 }
 function isAllDataValid() {
+    var errMsg = getById("errMsg");
+    var checkTitle = getById("title");
+    var checkPrice = getById("price");
+    var priceValue;
+    priceValue = parseFloat(checkPrice.value);
+    if (checkTitle.value == '') {
+        if (priceValue == null || isNaN(priceValue)) {
+            errMsg.innerText = "Please enter a title and valid price" +
+                "(numbers only)";
+        }
+        else {
+            errMsg.innerText = "Please enter a Title";
+        }
+        return false;
+    }
+    if (priceValue == null || isNaN(priceValue)) {
+        errMsg.innerText = "Please enter a valid price (numbers only)";
+        return false;
+    }
+    errMsg.innerText = "\n";
     return true;
 }

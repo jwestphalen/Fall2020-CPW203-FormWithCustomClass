@@ -13,10 +13,17 @@ myGame.isDigitalOnly = true;
 */
 
 
+
 window.onload = function(){
     let addBtn = 
         <HTMLElement>document.querySelector("input[type=button]");
     addBtn.onclick = addVideoGame;
+
+
+    //initialize \n for error message
+    let errMsg = <HTMLElement>getById("errMsg");
+    errMsg.innerText = "\n";
+    
 }
 
 function addVideoGame(){
@@ -65,7 +72,6 @@ function getVideoGame():VideoGame{
 
 }
 
-
 function displayGame(myGame:VideoGame):void{
     //Display video game below the form
     let displayDiv = getById("display");
@@ -93,7 +99,34 @@ function displayGame(myGame:VideoGame):void{
     // Add <p> game info
     displayDiv.appendChild(gameInfo);
 }
+
+/**
+ * Checks if there is data entered in title and price and whether
+ * price is a valid number entry.
+ */
 function isAllDataValid(){
-    return true;
     //Validation Code
+    let errMsg = <HTMLElement>getById("errMsg");
+    let checkTitle = <HTMLInputElement>getById("title");
+    let checkPrice = <HTMLInputElement>getById("price")
+    let priceValue;
+    priceValue = parseFloat(checkPrice.value);
+
+    if(checkTitle.value == ''){
+        if(priceValue == null || isNaN(priceValue)){
+            errMsg.innerText = "Please enter a title and valid price" +
+            "(numbers only)";
+        }
+        else{
+            errMsg.innerText = "Please enter a Title";
+        }
+        return false;
+    }
+    
+    if(priceValue == null || isNaN(priceValue)){
+        errMsg.innerText = "Please enter a valid price (numbers only)"
+        return false;
+    }
+    errMsg.innerText = "\n";
+    return true;
 }
