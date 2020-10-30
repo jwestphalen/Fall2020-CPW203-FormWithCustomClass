@@ -14,17 +14,18 @@ function addVideoGame() {
         displayGame(game);
     }
 }
-function displayGame(myGame) {
+function getById(id) {
+    return document.getElementById(id);
 }
 function getVideoGame() {
     var game = new VideoGame();
-    var titleInput = document.getElementById("title");
+    var titleInput = getById("title");
     game.title = titleInput.value;
-    var priceInput = document.getElementById("price");
+    var priceInput = getById("price");
     game.price = parseFloat(priceInput.value);
-    var ratingInput = document.getElementById("rating");
+    var ratingInput = getById("rating");
     game.rating = ratingInput.value;
-    var digitalOnly = document.getElementById("online");
+    var digitalOnly = getById("online");
     if (digitalOnly.checked) {
         game.isDigitalOnly = true;
     }
@@ -32,6 +33,19 @@ function getVideoGame() {
         game.isDigitalOnly = false;
     }
     return game;
+}
+function displayGame(myGame) {
+    var displayDiv = getById("display");
+    var gameHeading = document.createElement("h2");
+    gameHeading.innerText = myGame.title;
+    var gameInfo = document.createElement("p");
+    var notDigitalDisplay = "not ";
+    if (myGame.isDigitalOnly) {
+        notDigitalDisplay = "";
+    }
+    gameInfo.innerText = myGame.title + " has a rating of \n    " + myGame.rating + ". It costs $" + myGame.price.toFixed(2) + ". It is \n    " + notDigitalDisplay + " digital only.";
+    displayDiv.appendChild(gameHeading);
+    displayDiv.appendChild(gameInfo);
 }
 function isAllDataValid() {
     return true;
