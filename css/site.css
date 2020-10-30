@@ -11,3 +11,12 @@ label{
 input[type=checkbox], input[type=button]{
     margin-left: 50%;
 }
+
+h1{
+    background-color: orange;
+    text-align: center;
+}
+
+div[id = validation-summary]{
+    text-align: center;
+}
